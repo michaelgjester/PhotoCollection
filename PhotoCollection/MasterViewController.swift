@@ -14,7 +14,8 @@ class MasterViewController: UITableViewController {
     var objects = [Any]()
 
     private var postArray:[Post] = []
-
+    private var userArray:[User] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -36,6 +37,14 @@ class MasterViewController: UITableViewController {
             self?.tableView.reloadData()
         }
         NetworkingManager.loadPostsWithCompletion(completionHandler:loadPostsCompletionHandler)
+        
+        let loadUserCompletionHandler: ([User]) -> Void = {[weak self] (userArray:[User]) -> Void in
+            self?.userArray = userArray
+            //self?.tableView.reloadData()
+            
+            print("user array = \(userArray)")
+        }
+        NetworkingManager.loadUsersWithCompletion(completionHandler:loadUserCompletionHandler)
     }
 
     override func viewWillAppear(_ animated: Bool) {

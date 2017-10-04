@@ -15,6 +15,7 @@
 		1DEE25D81F8560CA0043EE56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DEE25D61F8560CA0043EE56 /* LaunchScreen.storyboard */; };
 		1DEE25E11F8562A40043EE56 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEE25E01F8562A40043EE56 /* NetworkingManager.swift */; };
 		1DEE25E41F85672B0043EE56 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEE25E31F85672B0043EE56 /* Post.swift */; };
+		1DEE25E61F8596500043EE56 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEE25E51F8596500043EE56 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		1DEE25D91F8560CA0043EE56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1DEE25E01F8562A40043EE56 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		1DEE25E31F85672B0043EE56 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		1DEE25E51F8596500043EE56 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				1DEE25E31F85672B0043EE56 /* Post.swift */,
+				1DEE25E51F8596500043EE56 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 			files = (
 				1DEE25D01F8560CA0043EE56 /* DetailViewController.swift in Sources */,
 				1DEE25E11F8562A40043EE56 /* NetworkingManager.swift in Sources */,
+				1DEE25E61F8596500043EE56 /* User.swift in Sources */,
 				1DEE25CE1F8560CA0043EE56 /* MasterViewController.swift in Sources */,
 				1DEE25CC1F8560CA0043EE56 /* AppDelegate.swift in Sources */,
 				1DEE25E41F85672B0043EE56 /* Post.swift in Sources */,
