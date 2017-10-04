@@ -12,14 +12,25 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
 
-
+    var postItem: Post = Post()
+    
     func configureView() {
+        
         // Update the user interface for the detail item.
+        
+        /*
         if let detail = detailItem {
             if let label = detailDescriptionLabel {
                 label.text = detail.description
             }
         }
+        */
+        
+
+        if let label = detailDescriptionLabel{
+            label.text = self.postItem.title
+        }
+
     }
 
     override func viewDidLoad() {

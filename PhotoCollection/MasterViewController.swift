@@ -75,7 +75,7 @@ class MasterViewController: UITableViewController {
     }
 
     // MARK: - Segues
-
+    /*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
@@ -87,6 +87,7 @@ class MasterViewController: UITableViewController {
             }
         }
     }
+    */
 
     // MARK: - Table View
 
@@ -145,6 +146,17 @@ class MasterViewController: UITableViewController {
         }
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //FIXME
+        print("selected row = \(indexPath.row)")
+        
+        self.detailViewController?.postItem = self.postArray[indexPath.row]
+        self.detailViewController?.configureView()
+        
+        //controller.detailItem = object
+        self.detailViewController?.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+        self.detailViewController?.navigationItem.leftItemsSupplementBackButton = true
+    }
 
 }
 
