@@ -27,6 +27,14 @@ class MasterViewController: UITableViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
+        
+        //FIXME - just test the Network call on initial load
+        NetworkingManager.loadPostsWithCompletion(completionHandler: {
+            
+            //FIXME - add code to the handler
+            print("executing the completion handler")
+            
+        })
     }
 
     override func viewWillAppear(_ animated: Bool) {
