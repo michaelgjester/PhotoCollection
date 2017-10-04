@@ -14,6 +14,7 @@
 		1DEE25D51F8560CA0043EE56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DEE25D41F8560CA0043EE56 /* Assets.xcassets */; };
 		1DEE25D81F8560CA0043EE56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DEE25D61F8560CA0043EE56 /* LaunchScreen.storyboard */; };
 		1DEE25E11F8562A40043EE56 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEE25E01F8562A40043EE56 /* NetworkingManager.swift */; };
+		1DEE25E41F85672B0043EE56 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEE25E31F85672B0043EE56 /* Post.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		1DEE25D71F8560CA0043EE56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1DEE25D91F8560CA0043EE56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1DEE25E01F8562A40043EE56 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
+		1DEE25E31F85672B0043EE56 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		1DEE25CA1F8560CA0043EE56 /* PhotoCollection */ = {
 			isa = PBXGroup;
 			children = (
+				1DEE25E21F8567090043EE56 /* Models */,
 				1DEE25DF1F8561C90043EE56 /* Networking */,
 				1DEE25CB1F8560CA0043EE56 /* AppDelegate.swift */,
 				1DEE25CD1F8560CA0043EE56 /* MasterViewController.swift */,
@@ -76,6 +79,14 @@
 				1DEE25E01F8562A40043EE56 /* NetworkingManager.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		1DEE25E21F8567090043EE56 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1DEE25E31F85672B0043EE56 /* Post.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +165,7 @@
 				1DEE25E11F8562A40043EE56 /* NetworkingManager.swift in Sources */,
 				1DEE25CE1F8560CA0043EE56 /* MasterViewController.swift in Sources */,
 				1DEE25CC1F8560CA0043EE56 /* AppDelegate.swift in Sources */,
+				1DEE25E41F85672B0043EE56 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -48,12 +48,14 @@ class NetworkingManager: NSObject {
                 do {
                     
                     //JSON response is an array of dictionaries
-                    if let responseDictionary = try JSONSerialization.jsonObject(with: data!, options: [])as? [[String: AnyObject]]{
+                    if let responseArray = try JSONSerialization.jsonObject(with: data!, options: [])as? [[String: AnyObject]]{
                         
                         
-                        print("responseDictionary = \(responseDictionary)")
+                        print("responseDictionary = \(responseArray)")
                         
-
+                        var postArray: [Post] = self.processJsonResponse(postDictionaryArray: responseArray)
+                        
+                        print("postArray[0] =\(postArray[0])")
                     }
                     
                 } catch let error as NSError {
@@ -63,6 +65,23 @@ class NetworkingManager: NSObject {
         }
         
         task.resume()
+    }
+    
+    private static func processJsonResponse(postDictionaryArray:[[String:AnyObject]])->[Post]{
+        
+        var postArray:[Post] = []
+        
+        for currentPostDictionary in postDictionaryArray{
+            let currentPost:Post = Post()
+            currentPost.userId = currentPostDictionary["userId"]!.stringValue as String
+            currentPost.id = currentPostDictionary["id"]!.stringValue as String
+            currentPost.title = currentPostDictionary["title"] as! String
+            currentPost.body = currentPostDictionary["body"] as! String
+            
+            postArray.append(currentPost)
+        }
+        
+        return postArray
     }
     
 }
