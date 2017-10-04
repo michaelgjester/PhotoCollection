@@ -13,6 +13,7 @@ class MasterViewController: UITableViewController {
     var detailViewController: DetailViewController? = nil
     var objects = [Any]()
 
+    private var postArray:[Post] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,13 +29,13 @@ class MasterViewController: UITableViewController {
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
         
-        //FIXME - just test the Network call on initial load
-        NetworkingManager.loadPostsWithCompletion(completionHandler: {
-            
-            //FIXME - add code to the handler
-            print("executing the completion handler")
-            
-        })
+        
+        
+        let loadPostsCompletionHandler: ([Post]) -> Void = {[weak self] (postArray:[Post]) -> Void in
+            self?.postArray = postArray
+            self?.tableView.reloadData()
+        }
+        NetworkingManager.loadPostsWithCompletion(completionHandler:loadPostsCompletionHandler)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -71,18 +72,22 @@ class MasterViewController: UITableViewController {
     // MARK: - Table View
 
     override func numberOfSections(in tableView: UITableView) -> Int {
+        
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return self.postArray.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        let object = objects[indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
+        //let object = objects[indexPath.row] as! NSDate
+        //cell.textLabel!.text = object.description
+        
+        cell.textLabel!.text = self.postArray[indexPath.row].title
+        
         return cell
     }
 

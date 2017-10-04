@@ -11,7 +11,7 @@ import Foundation
 class NetworkingManager: NSObject {
 
 
-    static func loadPostsWithCompletion(completionHandler:@escaping ()->Void) -> Void {
+    static func loadPostsWithCompletion(completionHandler:@escaping ([Post])->Void) -> Void {
         
         let baseRequestString = "https://jsonplaceholder.typicode.com/posts/"
         
@@ -56,6 +56,8 @@ class NetworkingManager: NSObject {
                         var postArray: [Post] = self.processJsonResponse(postDictionaryArray: responseArray)
                         
                         print("postArray[0] =\(postArray[0])")
+                        //perform completion handler on post array
+                        completionHandler(postArray)
                     }
                     
                 } catch let error as NSError {
