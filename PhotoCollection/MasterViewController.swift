@@ -107,14 +107,14 @@ class MasterViewController: UITableViewController {
         
         //cell.textLabel!.text = self.postArray[indexPath.row].title
         let postTitleLabel: UILabel = cell.viewWithTag(99) as! UILabel
-        let postAuthorLabel: UILabel = cell.viewWithTag(98) as! UILabel
+        let postAuthorEmailLabel: UILabel = cell.viewWithTag(98) as! UILabel
         
         postTitleLabel.text = self.postArray[indexPath.row].title
         
         let userId = self.postArray[indexPath.row].userId
         
         if let userForPost:User = self.userArray.first(where:{$0.id == userId}){
-            postAuthorLabel.text = userForPost.name
+            postAuthorEmailLabel.text = userForPost.email
             //cell.detailTextLabel?.text = userForPost.name
             
             //cell.textLabel!.text = userForPost.name
