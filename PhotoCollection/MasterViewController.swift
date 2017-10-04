@@ -31,20 +31,30 @@ class MasterViewController: UITableViewController {
         }
         
         
-        
+        /*
         let loadPostsCompletionHandler: ([Post]) -> Void = {[weak self] (postArray:[Post]) -> Void in
             self?.postArray = postArray
             self?.tableView.reloadData()
         }
         NetworkingManager.loadPostsWithCompletion(completionHandler:loadPostsCompletionHandler)
+        */
         
         let loadUserCompletionHandler: ([User]) -> Void = {[weak self] (userArray:[User]) -> Void in
+            //populate the user array
             self?.userArray = userArray
-            //self?.tableView.reloadData()
             
-            print("user array = \(userArray)")
+            //once user array is complete, populate the posts
+            let loadPostsCompletionHandler: ([Post]) -> Void = {[weak self] (postArray:[Post]) -> Void in
+                self?.postArray = postArray
+                self?.tableView.reloadData()
+            }
+            NetworkingManager.loadPostsWithCompletion(completionHandler:loadPostsCompletionHandler)
         }
         NetworkingManager.loadUsersWithCompletion(completionHandler:loadUserCompletionHandler)
+        
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 120.0
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -95,7 +105,27 @@ class MasterViewController: UITableViewController {
         //let object = objects[indexPath.row] as! NSDate
         //cell.textLabel!.text = object.description
         
-        cell.textLabel!.text = self.postArray[indexPath.row].title
+        //cell.textLabel!.text = self.postArray[indexPath.row].title
+        let postTitleLabel: UILabel = cell.viewWithTag(99) as! UILabel
+        let postAuthorLabel: UILabel = cell.viewWithTag(98) as! UILabel
+        
+        postTitleLabel.text = self.postArray[indexPath.row].title
+        
+        let userId = self.postArray[indexPath.row].userId
+        
+        if let userForPost:User = self.userArray.first(where:{$0.id == userId}){
+            postAuthorLabel.text = userForPost.name
+            //cell.detailTextLabel?.text = userForPost.name
+            
+            //cell.textLabel!.text = userForPost.name
+        }
+        
+//        if let userForPost:User = self.userArray.index(where:{ $0.id == userId }) as? User{
+//            //let eventSourceForLocal = eventStore.sources[index]
+//            cell.detailTextLabel!.text = userForPost.name
+//        }
+        
+        
         
         return cell
     }
