@@ -10,8 +10,9 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
-
+    @IBOutlet weak var postTitleLabel: UILabel!
+    @IBOutlet weak var postBodyLabel: UILabel!
+    
     var postItem: Post = Post()
     
     func configureView() {
@@ -26,11 +27,19 @@ class DetailViewController: UIViewController {
         }
         */
         
-
-        if let label = detailDescriptionLabel{
-            label.text = self.postItem.title
+        self.postTitleLabel.text = postItem.title
+        self.postBodyLabel.text = postItem.body
+        
+        /*
+        if let label1 = postTitleLabel{
+            label1.text = self.postItem.title
         }
-
+        
+        if let label2 = postBodyLabel{
+            label2.text = self.postItem.body
+        }
+         */
+ 
     }
 
     override func viewDidLoad() {
