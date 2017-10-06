@@ -75,6 +75,29 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
         return cell
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+
+        
+        let largeDetailViewController:LargeDetailViewController = LargeDetailViewController.init()
+        largeDetailViewController.modalPresentationStyle = .formSheet
+        largeDetailViewController.navigationItem.title = "Big Picture"
+        let navController:UINavigationController = UINavigationController(rootViewController: largeDetailViewController)
+        navController.modalPresentationStyle = .formSheet
+        
+        
+        
+        
+        //largeDetailViewController.navigationBar.topItem = "Big Picture"
+        
+        
+        
+        self.present(navController, animated: true) {
+            //completion after presenting view controller
+        }
+        
+        
+    }
     
 }
 

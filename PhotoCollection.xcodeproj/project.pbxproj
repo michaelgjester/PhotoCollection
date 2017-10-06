@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D1AE2611F8807120087B0E7 /* LargeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1AE25F1F8807120087B0E7 /* LargeDetailViewController.swift */; };
+		1D1AE2621F8807120087B0E7 /* LargeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D1AE2601F8807120087B0E7 /* LargeDetailViewController.xib */; };
 		1D9D4A771F87006500F7F8C4 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9D4A761F87006400F7F8C4 /* Album.swift */; };
 		1D9D4A791F87009D00F7F8C4 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9D4A781F87009D00F7F8C4 /* Photo.swift */; };
 		1DAF37C81F8717B20080268C /* UIImage+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAF37C71F8717B20080268C /* UIImage+Networking.swift */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D1AE25F1F8807120087B0E7 /* LargeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeDetailViewController.swift; sourceTree = "<group>"; };
+		1D1AE2601F8807120087B0E7 /* LargeDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LargeDetailViewController.xib; sourceTree = "<group>"; };
 		1D9D4A761F87006400F7F8C4 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		1D9D4A781F87009D00F7F8C4 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		1DAF37C71F8717B20080268C /* UIImage+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Networking.swift"; sourceTree = "<group>"; };
@@ -79,6 +83,8 @@
 				1DEE25D41F8560CA0043EE56 /* Assets.xcassets */,
 				1DEE25D61F8560CA0043EE56 /* LaunchScreen.storyboard */,
 				1DEE25D91F8560CA0043EE56 /* Info.plist */,
+				1D1AE25F1F8807120087B0E7 /* LargeDetailViewController.swift */,
+				1D1AE2601F8807120087B0E7 /* LargeDetailViewController.xib */,
 			);
 			path = PhotoCollection;
 			sourceTree = "<group>";
@@ -166,6 +172,7 @@
 				1DEE25D81F8560CA0043EE56 /* LaunchScreen.storyboard in Resources */,
 				1DEE25D51F8560CA0043EE56 /* Assets.xcassets in Resources */,
 				1DEE25D31F8560CA0043EE56 /* Main.storyboard in Resources */,
+				1D1AE2621F8807120087B0E7 /* LargeDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +190,7 @@
 				1DEE25E61F8596500043EE56 /* User.swift in Sources */,
 				1DEE25CE1F8560CA0043EE56 /* MasterViewController.swift in Sources */,
 				1DEE25CC1F8560CA0043EE56 /* AppDelegate.swift in Sources */,
+				1D1AE2611F8807120087B0E7 /* LargeDetailViewController.swift in Sources */,
 				1DAF37C81F8717B20080268C /* UIImage+Networking.swift in Sources */,
 				1D9D4A771F87006500F7F8C4 /* Album.swift in Sources */,
 				1DEE25E41F85672B0043EE56 /* Post.swift in Sources */,
