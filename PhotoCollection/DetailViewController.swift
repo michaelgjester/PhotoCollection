@@ -96,6 +96,6 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
         return cell
     }
 
-
+    
 }
 
