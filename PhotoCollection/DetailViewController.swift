@@ -78,7 +78,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
 
-        
+        //tapping on a cell will launch an large/expanded view of the image url
         let largeDetailViewController:LargeDetailViewController = LargeDetailViewController.init()
         largeDetailViewController.photoItem = photoCollectionArray[indexPath.row]
         
