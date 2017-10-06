@@ -13,7 +13,8 @@ class LargeDetailViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     
-
+    @IBOutlet weak var photoTitleLabel: UILabel!
+    
     var photoItem: Photo = Photo()
     
     override func viewDidLoad() {
@@ -33,6 +34,8 @@ class LargeDetailViewController: UIViewController {
         
         // Update the user interface for the detail item.
         self.navigationItem.title = photoItem.title
+        
+        self.photoTitleLabel.text = photoItem.title
         
         //asynchronously download the large image
         self.imageView.downloadImageFromNetworkAtURL(url: photoItem.url)
