@@ -21,10 +21,10 @@ class MasterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        navigationItem.leftBarButtonItem = editButtonItem
-
-        navigationItem.title = "Challenge Accepted!"
         
+        //configure the split view
+        navigationItem.leftBarButtonItem = editButtonItem
+        navigationItem.title = "Challenge Accepted!"
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 120.0
         
@@ -35,31 +35,41 @@ class MasterViewController: UITableViewController {
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
         
+        //grab data from network
+        self.performNetworkCalls()
         
-        /*
-        let loadPostsCompletionHandler: ([Post]) -> Void = {[weak self] (postArray:[Post]) -> Void in
-            self?.postArray = postArray
-            self?.tableView.reloadData()
+        //after networking completes, reload data and show details for first row
+        UIView.animate(withDuration: 0, animations: {
+            //first reload the data
+            self.tableView.reloadData()
+        }) { (finished) in
+            //wait until the master table view is loaded
+            //before displaying the detail view for the first row
+            let indexPathForFirstRow:IndexPath = IndexPath.init(row: 0, section: 0)
+            self.showDetailViewControllerForRowAtIndexPath(indexPath: indexPathForFirstRow)
         }
-        NetworkingManager.loadPostsWithCompletion(completionHandler:loadPostsCompletionHandler)
-        */
         
+        
+        
+    }
+
+    func performNetworkCalls(){
+        
+        //use a dispatch group to ensure all network calls are completed
         let dispatchGroup = DispatchGroup()
         
         
-        //populate the user array
+        //load users
         dispatchGroup.enter()
         let loadUserCompletionHandler: ([User]) -> Void = {[weak self] (userArray:[User]) -> Void in
-            print("users done...")
             self?.userArray = userArray
             dispatchGroup.leave()
         }
         NetworkingManager.loadUsersWithCompletion(completionHandler:loadUserCompletionHandler)
         
-        //populate the posts
+        //load posts
         dispatchGroup.enter()
         let loadPostsCompletionHandler: ([Post]) -> Void = {[weak self] (postArray:[Post]) -> Void in
-            print("posts done...")
             self?.postArray = postArray
             dispatchGroup.leave()
         }
@@ -68,7 +78,6 @@ class MasterViewController: UITableViewController {
         //load albums
         dispatchGroup.enter()
         NetworkingManager.loadObjectsWithCompletion(requestStringSuffix: "albums") { [weak self](albumArray:[NSObject]) in
-            print("albums done...")
             self?.albumArray = albumArray as! [Album]
             dispatchGroup.leave()
         }
@@ -76,23 +85,14 @@ class MasterViewController: UITableViewController {
         //load photos
         dispatchGroup.enter()
         NetworkingManager.loadObjectsWithCompletion(requestStringSuffix: "photos") { [weak self](photoArray:[NSObject]) in
-            print("photos done...")
             self?.photoArray = photoArray as! [Photo]
             dispatchGroup.leave()
         }
         
-        //reload the table once all network calls are complete
-        print("waiting...")
+        //wait until network calls are complete
         dispatchGroup.wait()
-        
-        print("ok now we are done...")
-        self.tableView.reloadData()
-        
-        
-
     }
-
-
+    
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
@@ -125,7 +125,7 @@ class MasterViewController: UITableViewController {
     }
     */
 
-    // MARK: - Table View
+    // MARK: - Table View Delegate/DataSource methods
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -152,18 +152,8 @@ class MasterViewController: UITableViewController {
         
         if let userForPost:User = self.userArray.first(where:{$0.id == userId}){
             postAuthorEmailLabel.text = userForPost.email
-            //cell.detailTextLabel?.text = userForPost.name
-            
-            //cell.textLabel!.text = userForPost.name
         }
-        
-//        if let userForPost:User = self.userArray.index(where:{ $0.id == userId }) as? User{
-//            //let eventSourceForLocal = eventStore.sources[index]
-//            cell.detailTextLabel!.text = userForPost.name
-//        }
-        
-        
-        
+
         return cell
     }
 
@@ -183,8 +173,10 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //FIXME
-        print("selected row = \(indexPath.row)")
+        self.showDetailViewControllerForRowAtIndexPath(indexPath: indexPath)
+    }
+    
+    func showDetailViewControllerForRowAtIndexPath(indexPath:IndexPath){
         
         //note there is a one-to-one correlation between posts
         //and albums, i.e. there is a unique id field for each
