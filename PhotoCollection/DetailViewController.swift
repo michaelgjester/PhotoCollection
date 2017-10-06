@@ -89,7 +89,9 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
         //let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath)
         
-        cell.backgroundColor = UIColor.blue
+        let imageViewForCell:UIImageView = cell.viewWithTag(77) as! UIImageView
+        
+        imageViewForCell.downloadImageFromNetworkAtURL(url: photoCollectionArray[indexPath.row].thumbnailUrl)
         
         return cell
     }

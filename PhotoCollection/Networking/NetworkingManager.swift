@@ -256,4 +256,53 @@ class NetworkingManager: NSObject {
         
         return photoArray
     }
+    
+    /// Network call for downloading an image from the network
+    ///
+    /// - parameters:
+    ///     - urlString - a string value associated with a URL containing an image,
+    ///     e.g. "http://placehold.it/150/b04f2e"
+    ///     - downloadCompletionHandler - callback executed after network response
+    /// - returns: void
+    static func downloadImageAtURL(urlString: String, downloadCompletionHandler:@escaping ((Data)->Void)){
+        
+        
+        guard let url = URL(string: urlString) else {
+            print("Error: cannot create URL")
+            return
+        }
+        
+        // set up the session
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config,
+                                 delegate: nil,
+                                 delegateQueue: OperationQueue.main)
+        
+        // make the request with the session
+        let urlRequest = URLRequest(url: url)
+        let task = session.dataTask(with: urlRequest) { (data, response, error) in
+            
+            //check 1: no errors
+            guard error == nil else {
+                print("error calling the request:\(error!)")
+                return
+            }
+            
+            //check 2: data is non-nil
+            guard data != nil else {
+                print("Error: data is nil")
+                return
+            }
+            
+            //check 3: response parameter is non-nil
+            if response != nil {
+                downloadCompletionHandler(data!)
+            } else {
+                print("Error: response in nil")
+            }
+            
+        }
+        
+        task.resume()
+    }
 }
