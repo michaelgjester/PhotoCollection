@@ -70,7 +70,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="rGH-kI-rKi">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="rGH-kI-rKi">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -110,6 +110,7 @@
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
                     <connections>
                         <outlet property="albumTitleLabel" destination="WXt-IP-z4X" id="RkF-YI-LVd"/>
+                        <outlet property="photoCollectionView" destination="pFf-fV-8GP" id="70x-Aw-okh"/>
                         <outlet property="postBodyLabel" destination="OfL-fb-0HU" id="AEz-81-9GV"/>
                         <outlet property="postTitleLabel" destination="0XM-y9-sOw" id="x9O-Oe-7SR"/>
                     </connections>

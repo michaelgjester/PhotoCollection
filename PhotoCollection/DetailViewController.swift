@@ -8,11 +8,13 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var postTitleLabel: UILabel!
     @IBOutlet weak var postBodyLabel: UILabel!
     @IBOutlet weak var albumTitleLabel: UILabel!
+    
+    @IBOutlet weak var photoCollectionView: UICollectionView!
     
     var postItem: Post = Post()
     var albumItem: Album = Album()
@@ -34,6 +36,10 @@ class DetailViewController: UIViewController {
         self.postBodyLabel.text = postItem.body
         self.albumTitleLabel.text = albumItem.title
         
+        
+        
+        self.photoCollectionView.reloadData()
+        
         /*
         if let label1 = postTitleLabel{
             label1.text = self.postItem.title
@@ -48,6 +54,11 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //set the delegate methods
+        self.photoCollectionView.dataSource = self
+        self.photoCollectionView.delegate = self
+        
         // Do any additional setup after loading the view, typically from a nib.
         configureView()
     }
@@ -62,6 +73,25 @@ class DetailViewController: UIViewController {
             // Update the view.
             configureView()
         }
+    }
+
+    // MARK: - CollectionView Delegate Methods
+    func numberOfSections(in collectionView: UICollectionView) -> Int{
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+        return photoCollectionArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+        
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath)
+        
+        cell.backgroundColor = UIColor.blue
+        
+        return cell
     }
 
 
