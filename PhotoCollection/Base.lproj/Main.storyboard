@@ -54,17 +54,27 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXt-IP-z4X">
+                                <rect key="frame" x="20" y="519" width="335" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="OfL-fb-0HU" firstAttribute="centerX" secondItem="0XM-y9-sOw" secondAttribute="centerX" id="2nT-a6-TTa"/>
                             <constraint firstItem="OfL-fb-0HU" firstAttribute="top" secondItem="svH-Pt-448" secondAttribute="top" constant="352" id="3nD-yb-hXG"/>
                             <constraint firstAttribute="bottom" secondItem="OfL-fb-0HU" secondAttribute="bottom" constant="165" id="BZe-L7-SR0"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="WXt-IP-z4X" secondAttribute="trailing" constant="20" id="G2n-vT-Ydi"/>
+                            <constraint firstItem="WXt-IP-z4X" firstAttribute="top" secondItem="OfL-fb-0HU" secondAttribute="bottom" constant="17" id="GC7-ax-Y5H"/>
                             <constraint firstItem="OfL-fb-0HU" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="HZn-Di-BeG"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="OfL-fb-0HU" secondAttribute="trailing" constant="20" id="Kqu-2u-HTd"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" symbolic="YES" id="Tsc-yG-G1q"/>
+                            <constraint firstItem="WXt-IP-z4X" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="20" id="VRP-dE-MdW"/>
                             <constraint firstItem="OfL-fb-0HU" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" id="WsY-xl-ZgX"/>
                             <constraint firstItem="OfL-fb-0HU" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" id="cSJ-bJ-2mx"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="WXt-IP-z4X" secondAttribute="bottom" constant="127" id="g6h-yo-Ldb"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="jWN-iV-94e"/>
                             <constraint firstItem="OfL-fb-0HU" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="20" id="kQw-x3-kBw"/>
                             <constraint firstItem="OfL-fb-0HU" firstAttribute="top" secondItem="0XM-y9-sOw" secondAttribute="bottom" constant="7" id="mM6-GJ-CyC"/>
@@ -75,6 +85,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
                     <connections>
+                        <outlet property="albumTitleLabel" destination="WXt-IP-z4X" id="RkF-YI-LVd"/>
                         <outlet property="postBodyLabel" destination="OfL-fb-0HU" id="AEz-81-9GV"/>
                         <outlet property="postTitleLabel" destination="0XM-y9-sOw" id="x9O-Oe-7SR"/>
                     </connections>

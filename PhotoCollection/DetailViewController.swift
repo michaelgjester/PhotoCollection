@@ -12,8 +12,10 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var postTitleLabel: UILabel!
     @IBOutlet weak var postBodyLabel: UILabel!
+    @IBOutlet weak var albumTitleLabel: UILabel!
     
     var postItem: Post = Post()
+    var albumItem: Album = Album()
     
     func configureView() {
         
@@ -29,6 +31,7 @@ class DetailViewController: UIViewController {
         
         self.postTitleLabel.text = postItem.title
         self.postBodyLabel.text = postItem.body
+        self.albumTitleLabel.text = albumItem.title
         
         /*
         if let label1 = postTitleLabel{

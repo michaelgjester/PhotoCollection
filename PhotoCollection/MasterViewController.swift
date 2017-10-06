@@ -15,6 +15,8 @@ class MasterViewController: UITableViewController {
 
     private var postArray:[Post] = []
     private var userArray:[User] = []
+    private var albumArray:[Album] = []
+    private var photoArray:[Photo] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,16 +54,14 @@ class MasterViewController: UITableViewController {
         }
         NetworkingManager.loadUsersWithCompletion(completionHandler:loadUserCompletionHandler)
         
-        NetworkingManager.loadObjectsWithCompletion(requestStringSuffix: "albums") { (albumArray:[NSObject]) in
-            //do something here...
-            print("here is the ALBUM completion handler...")
-            print("album array = \(albumArray)")
+        //load albums
+        NetworkingManager.loadObjectsWithCompletion(requestStringSuffix: "albums") { [weak self](albumArray:[NSObject]) in
+            self?.albumArray = albumArray as! [Album]
         }
         
-        NetworkingManager.loadObjectsWithCompletion(requestStringSuffix: "photos") { (photoArray:[NSObject]) in
-            //do something here...
-            print("here is the PHOTOS completion handler...")
-            print("photo array = \(photoArray)")
+        //load photos
+        NetworkingManager.loadObjectsWithCompletion(requestStringSuffix: "photos") { [weak self](photoArray:[NSObject]) in
+            self?.photoArray = photoArray as! [Photo]
         }
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -161,7 +161,11 @@ class MasterViewController: UITableViewController {
         //FIXME
         print("selected row = \(indexPath.row)")
         
+        //note there is a one-to-one correlation between posts
+        //and albums, i.e. there is a unique id field for each
         self.detailViewController?.postItem = self.postArray[indexPath.row]
+        self.detailViewController?.albumItem = self.albumArray[indexPath.row]
+        
         self.detailViewController?.configureView()
         
         //controller.detailItem = object
