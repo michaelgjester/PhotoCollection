@@ -10,7 +10,9 @@ import Foundation
 
 class NetworkingManager: NSObject {
 
-
+    static let networkQueue: OperationQueue = OperationQueue()
+    //OperationQueue.main
+    
     static func loadPostsWithCompletion(completionHandler:@escaping ([Post])->Void) -> Void {
         
         let baseRequestString = "https://jsonplaceholder.typicode.com/posts/"
@@ -25,7 +27,7 @@ class NetworkingManager: NSObject {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config,
                                  delegate: nil,
-                                 delegateQueue: OperationQueue.main)
+                                 delegateQueue: networkQueue)
         
         // make the request with the session
         let urlRequest = URLRequest(url: url)
@@ -96,7 +98,7 @@ class NetworkingManager: NSObject {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config,
                                  delegate: nil,
-                                 delegateQueue: OperationQueue.main)
+                                 delegateQueue: networkQueue)
         
         // make the request with the session
         let urlRequest = URLRequest(url: url)
@@ -122,11 +124,11 @@ class NetworkingManager: NSObject {
                     if let responseArray = try JSONSerialization.jsonObject(with: data!, options: [])as? [[String: AnyObject]]{
                         
                         
-                        print(" user responseDictionary = \(responseArray)")
+                        //print(" user responseDictionary = \(responseArray)")
                         
                         var userArray: [User] = self.processJsonResponseForUser(userDictionaryArray: responseArray)
                         
-                        print("user Array[0] =\(userArray[0])")
+                        //print("user Array[0] =\(userArray[0])")
                         //perform completion handler on post array
                         completionHandler(userArray)
                     }
@@ -172,7 +174,7 @@ class NetworkingManager: NSObject {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config,
                                  delegate: nil,
-                                 delegateQueue: OperationQueue.main)
+                                 delegateQueue: networkQueue)
         
         // make the request with the session
         let urlRequest = URLRequest(url: url)

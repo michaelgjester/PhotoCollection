@@ -25,6 +25,9 @@ class MasterViewController: UITableViewController {
 
         navigationItem.title = "Challenge Accepted!"
         
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 120.0
+        
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
         navigationItem.rightBarButtonItem = addButton
         if let split = splitViewController {
@@ -41,32 +44,54 @@ class MasterViewController: UITableViewController {
         NetworkingManager.loadPostsWithCompletion(completionHandler:loadPostsCompletionHandler)
         */
         
+        let dispatchGroup = DispatchGroup()
+        
+        
+        //populate the user array
+        dispatchGroup.enter()
         let loadUserCompletionHandler: ([User]) -> Void = {[weak self] (userArray:[User]) -> Void in
-            //populate the user array
+            print("users done...")
             self?.userArray = userArray
-            
-            //once user array is complete, populate the posts
-            let loadPostsCompletionHandler: ([Post]) -> Void = {[weak self] (postArray:[Post]) -> Void in
-                self?.postArray = postArray
-                self?.tableView.reloadData()
-            }
-            NetworkingManager.loadPostsWithCompletion(completionHandler:loadPostsCompletionHandler)
+            dispatchGroup.leave()
         }
         NetworkingManager.loadUsersWithCompletion(completionHandler:loadUserCompletionHandler)
         
+        //populate the posts
+        dispatchGroup.enter()
+        let loadPostsCompletionHandler: ([Post]) -> Void = {[weak self] (postArray:[Post]) -> Void in
+            print("posts done...")
+            self?.postArray = postArray
+            dispatchGroup.leave()
+        }
+        NetworkingManager.loadPostsWithCompletion(completionHandler:loadPostsCompletionHandler)
+        
         //load albums
+        dispatchGroup.enter()
         NetworkingManager.loadObjectsWithCompletion(requestStringSuffix: "albums") { [weak self](albumArray:[NSObject]) in
+            print("albums done...")
             self?.albumArray = albumArray as! [Album]
+            dispatchGroup.leave()
         }
         
         //load photos
+        dispatchGroup.enter()
         NetworkingManager.loadObjectsWithCompletion(requestStringSuffix: "photos") { [weak self](photoArray:[NSObject]) in
+            print("photos done...")
             self?.photoArray = photoArray as! [Photo]
+            dispatchGroup.leave()
         }
         
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 120.0
+        //reload the table once all network calls are complete
+        print("waiting...")
+        dispatchGroup.wait()
+        
+        print("ok now we are done...")
+        self.tableView.reloadData()
+        
+        
+
     }
+
 
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
@@ -164,6 +189,7 @@ class MasterViewController: UITableViewController {
         //note there is a one-to-one correlation between posts
         //and albums, i.e. there is a unique id field for each
         self.detailViewController?.postItem = self.postArray[indexPath.row]
+        
         self.detailViewController?.albumItem = self.albumArray[indexPath.row]
         
         //get a subset of photos corresponding to only that album
