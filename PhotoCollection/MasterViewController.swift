@@ -61,19 +61,17 @@ class MasterViewController: UITableViewController {
         
         //load users
         dispatchGroup.enter()
-        let loadUserCompletionHandler: ([User]) -> Void = {[weak self] (userArray:[User]) -> Void in
-            self?.userArray = userArray
+        NetworkingManager.loadObjectsWithCompletion(requestStringSuffix: "users") { [weak self](userArray:[NSObject]) in
+            self?.userArray = userArray as! [User]
             dispatchGroup.leave()
         }
-        NetworkingManager.loadUsersWithCompletion(completionHandler:loadUserCompletionHandler)
         
         //load posts
         dispatchGroup.enter()
-        let loadPostsCompletionHandler: ([Post]) -> Void = {[weak self] (postArray:[Post]) -> Void in
-            self?.postArray = postArray
+        NetworkingManager.loadObjectsWithCompletion(requestStringSuffix: "posts") { [weak self](postArray:[NSObject]) in
+            self?.postArray = postArray as! [Post]
             dispatchGroup.leave()
         }
-        NetworkingManager.loadPostsWithCompletion(completionHandler:loadPostsCompletionHandler)
         
         //load albums
         dispatchGroup.enter()
