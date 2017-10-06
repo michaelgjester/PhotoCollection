@@ -80,17 +80,11 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
 
         
         let largeDetailViewController:LargeDetailViewController = LargeDetailViewController.init()
-        largeDetailViewController.modalPresentationStyle = .formSheet
-        largeDetailViewController.navigationItem.title = "Big Picture"
+        largeDetailViewController.photoItem = photoCollectionArray[indexPath.row]
+        
         let navController:UINavigationController = UINavigationController(rootViewController: largeDetailViewController)
         navController.modalPresentationStyle = .formSheet
-        
-        
-        
-        
-        //largeDetailViewController.navigationBar.topItem = "Big Picture"
-        
-        
+
         
         self.present(navController, animated: true) {
             //completion after presenting view controller
