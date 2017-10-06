@@ -27,6 +27,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
         self.postBodyLabel.text = postItem.body
         self.albumTitleLabel.text = albumItem.title
         
+        self.navigationItem.title = postItem.title
         
         self.photoCollectionView.reloadData()
  
