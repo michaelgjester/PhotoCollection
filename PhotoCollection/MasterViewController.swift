@@ -166,9 +166,15 @@ class MasterViewController: UITableViewController {
         self.detailViewController?.postItem = self.postArray[indexPath.row]
         self.detailViewController?.albumItem = self.albumArray[indexPath.row]
         
+        //get a subset of photos corresponding to only that album
+        let albumId = self.detailViewController?.albumItem.id
+        self.detailViewController?.photoCollectionArray = self.photoArray.filter({$0.albumId == albumId})
+        
+        //let the detail view controller configure itself now that it has the
+        //proper model objects passed to it
         self.detailViewController?.configureView()
         
-        //controller.detailItem = object
+        //configure navigation items for the detail view controller
         self.detailViewController?.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         self.detailViewController?.navigationItem.leftItemsSupplementBackButton = true
     }

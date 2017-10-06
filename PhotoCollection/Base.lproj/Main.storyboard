@@ -60,11 +60,34 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pFf-fV-8GP">
+                                <rect key="frame" x="20" y="548" width="335" height="111"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7OD-dH-ABG">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="rGH-kI-rKi">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="OfL-fb-0HU" firstAttribute="centerX" secondItem="0XM-y9-sOw" secondAttribute="centerX" id="2nT-a6-TTa"/>
                             <constraint firstItem="OfL-fb-0HU" firstAttribute="top" secondItem="svH-Pt-448" secondAttribute="top" constant="352" id="3nD-yb-hXG"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="pFf-fV-8GP" secondAttribute="bottom" constant="8" id="6SL-5P-Th0"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="pFf-fV-8GP" secondAttribute="trailing" constant="20" id="8r8-4q-l8Q"/>
+                            <constraint firstItem="pFf-fV-8GP" firstAttribute="top" secondItem="WXt-IP-z4X" secondAttribute="bottom" constant="8" id="ANX-2V-GVO"/>
                             <constraint firstAttribute="bottom" secondItem="OfL-fb-0HU" secondAttribute="bottom" constant="165" id="BZe-L7-SR0"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="WXt-IP-z4X" secondAttribute="trailing" constant="20" id="G2n-vT-Ydi"/>
                             <constraint firstItem="WXt-IP-z4X" firstAttribute="top" secondItem="OfL-fb-0HU" secondAttribute="bottom" constant="17" id="GC7-ax-Y5H"/>
@@ -79,6 +102,7 @@
                             <constraint firstItem="OfL-fb-0HU" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="20" id="kQw-x3-kBw"/>
                             <constraint firstItem="OfL-fb-0HU" firstAttribute="top" secondItem="0XM-y9-sOw" secondAttribute="bottom" constant="7" id="mM6-GJ-CyC"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="OfL-fb-0HU" secondAttribute="bottom" constant="165" id="rGA-c1-GqE"/>
+                            <constraint firstItem="pFf-fV-8GP" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="20" id="w7N-QJ-pL0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                     </view>

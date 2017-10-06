@@ -16,6 +16,7 @@ class DetailViewController: UIViewController {
     
     var postItem: Post = Post()
     var albumItem: Album = Album()
+    var photoCollectionArray:[Photo] = []
     
     func configureView() {
         
