@@ -52,10 +52,16 @@ class MasterViewController: UITableViewController {
         }
         NetworkingManager.loadUsersWithCompletion(completionHandler:loadUserCompletionHandler)
         
-        
-        NetworkingManager.loadAlbumsWithCompletion { (albumArray:[Album]) in
+        NetworkingManager.loadObjectsWithCompletion(requestStringSuffix: "albums") { (albumArray:[NSObject]) in
             //do something here...
-            print("the completion finished for albums...")
+            print("here is the ALBUM completion handler...")
+            print("album array = \(albumArray)")
+        }
+        
+        NetworkingManager.loadObjectsWithCompletion(requestStringSuffix: "photos") { (photoArray:[NSObject]) in
+            //do something here...
+            print("here is the PHOTOS completion handler...")
+            print("photo array = \(photoArray)")
         }
         
         self.tableView.rowHeight = UITableViewAutomaticDimension

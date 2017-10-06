@@ -158,12 +158,12 @@ class NetworkingManager: NSObject {
         return userArray
     }
     
-    static func loadAlbumsWithCompletion(completionHandler:@escaping ([Album])->Void) -> Void {
+    static func loadObjectsWithCompletion(requestStringSuffix:String, completionHandler:@escaping ([NSObject])->Void) -> Void {
         
-        let baseRequestString = "https://jsonplaceholder.typicode.com/albums/"
+        let baseRequestString = "https://jsonplaceholder.typicode.com/"
+        let fullRequestString = baseRequestString + requestStringSuffix + "/"
         
-        
-        guard let url = URL(string: baseRequestString) else {
+        guard let url = URL(string: fullRequestString) else {
             print("Error: cannot create URL")
             return
         }
@@ -198,13 +198,16 @@ class NetworkingManager: NSObject {
                     if let responseArray = try JSONSerialization.jsonObject(with: data!, options: [])as? [[String: AnyObject]]{
                         
                         
-                        print(" album responseDictionary = \(responseArray)")
+                        var modelObjectArray: [NSObject] = []
                         
-                        var albumArray: [Album] = self.processJsonResponseForAlbum(albumDictionaryArray: responseArray)
+                        if (requestStringSuffix.elementsEqual("albums")){
+                            modelObjectArray = self.processJsonResponseForAlbum(albumDictionaryArray: responseArray)
+                        } else if (requestStringSuffix.elementsEqual("photos")){
+                            modelObjectArray = self.processJsonResponseForPhoto(photoDictionaryArray: responseArray)
+                        }
                         
-                        print("album Array[0] =\(albumArray[0])")
-                        //perform completion handler on post array
-                        completionHandler(albumArray)
+                        //perform completion handler on model object array
+                        completionHandler(modelObjectArray)
                     }
                     
                 } catch let error as NSError {
@@ -234,5 +237,23 @@ class NetworkingManager: NSObject {
         return albumArray
     }
     
-    
+    private static func processJsonResponseForPhoto(photoDictionaryArray:[[String:AnyObject]])->[Photo]{
+        
+        var photoArray:[Photo] = []
+        
+        for currentPhotoDictionary in photoDictionaryArray{
+            
+            let currentPhoto:Photo = Photo()
+            
+            currentPhoto.albumId = currentPhotoDictionary["albumId"]!.stringValue as String
+            currentPhoto.id = currentPhotoDictionary["id"]!.stringValue as String
+            currentPhoto.title = currentPhotoDictionary["title"] as! String
+            currentPhoto.url = currentPhotoDictionary["url"] as! String
+            currentPhoto.thumbnailUrl = currentPhotoDictionary["thumbnailUrl"] as! String
+            
+            photoArray.append(currentPhoto)
+        }
+        
+        return photoArray
+    }
 }
