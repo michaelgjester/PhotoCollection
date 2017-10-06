@@ -21,12 +21,12 @@ extension UIImageView{
     ///
     /// - parameters:
     ///     - url - string value of a url containing an image
-    ///     e.g. https://a.thumbs.redditmedia.com/YLaKqzffdnDD-3i6Ka7_sz7PcWL9RWl9hl1ZveSvdV4.jpg
+    ///     e.g. http://placehold.it/150/b04f2e
     /// - returns: void
     func downloadImageFromNetworkAtURL(url: String){
         
         //check to see if valid URL is being used (e.g. could be empty)
-        let isValidURL = url.contains("http://")
+        let isValidURL = url.contains("http://") || url.contains("https://")
         if !isValidURL{
             self.image =  UIImage(named:"defaultThumbnail.png")
             return

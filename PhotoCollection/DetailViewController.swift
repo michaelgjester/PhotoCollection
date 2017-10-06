@@ -23,32 +23,12 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
     func configureView() {
         
         // Update the user interface for the detail item.
-        
-        /*
-        if let detail = detailItem {
-            if let label = detailDescriptionLabel {
-                label.text = detail.description
-            }
-        }
-        */
-        
         self.postTitleLabel.text = postItem.title
         self.postBodyLabel.text = postItem.body
         self.albumTitleLabel.text = albumItem.title
         
         
-        
         self.photoCollectionView.reloadData()
-        
-        /*
-        if let label1 = postTitleLabel{
-            label1.text = self.postItem.title
-        }
-        
-        if let label2 = postBodyLabel{
-            label2.text = self.postItem.body
-        }
-         */
  
     }
 
@@ -86,11 +66,10 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath)
         
+        //asynchronously download the thumbnail image for each cell
         let imageViewForCell:UIImageView = cell.viewWithTag(77) as! UIImageView
-        
         imageViewForCell.downloadImageFromNetworkAtURL(url: photoCollectionArray[indexPath.row].thumbnailUrl)
         
         return cell

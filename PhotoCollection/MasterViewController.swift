@@ -28,8 +28,12 @@ class MasterViewController: UITableViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 120.0
         
+        //app currently not using an + button to add new item, might add one later
+        /*
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
         navigationItem.rightBarButtonItem = addButton
+        */
+        
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
@@ -38,7 +42,9 @@ class MasterViewController: UITableViewController {
         //grab data from network
         self.performNetworkCalls()
         
-        //after networking completes, reload data and show details for first row
+        //after networking completes, reload table
+        //make sure table reload (and any other animations)
+        //finishes reloading before showing detail information for first row
         UIView.animate(withDuration: 0, animations: {
             //first reload the data
             self.tableView.reloadData()
@@ -101,32 +107,20 @@ class MasterViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    //app currently not using an + button to add new item, might add one later
+    /*
     @objc
     func insertNewObject(_ sender: Any) {
         objects.insert(NSDate(), at: 0)
         let indexPath = IndexPath(row: 0, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
     }
-
-    // MARK: - Segues
-    /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let object = objects[indexPath.row] as! NSDate
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-            }
-        }
-    }
     */
+    
 
     // MARK: - Table View Delegate/DataSource methods
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
         return 1
     }
 
@@ -135,19 +129,18 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        //let object = objects[indexPath.row] as! NSDate
-        //cell.textLabel!.text = object.description
-        
-        //cell.textLabel!.text = self.postArray[indexPath.row].title
+        //configure the text for the labels in the table view cells
         let postTitleLabel: UILabel = cell.viewWithTag(99) as! UILabel
         let postAuthorEmailLabel: UILabel = cell.viewWithTag(98) as! UILabel
         
         postTitleLabel.text = self.postArray[indexPath.row].title
-        
+    
+        //user email is not in the post array objects, so use the userId field to
+        //cross-reference the email address from the userArray
         let userId = self.postArray[indexPath.row].userId
-        
         if let userForPost:User = self.userArray.first(where:{$0.id == userId}){
             postAuthorEmailLabel.text = userForPost.email
         }
@@ -161,13 +154,14 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == .delete {
-            //objects.remove(at: indexPath.row)
             self.postArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
+        
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -179,7 +173,6 @@ class MasterViewController: UITableViewController {
         //note there is a one-to-one correlation between posts
         //and albums, i.e. there is a unique id field for each
         self.detailViewController?.postItem = self.postArray[indexPath.row]
-        
         self.detailViewController?.albumItem = self.albumArray[indexPath.row]
         
         //get a subset of photos corresponding to only that album

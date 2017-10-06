@@ -115,6 +115,11 @@ class NetworkingManager: NSObject {
             currentUser.email = currentUserDictionary["email"] as! String
             currentUser.address = "(mock address)" //currentUserDictionary["address"] as! String
             
+            /*
+             potential enhancement: use other fields from JSON response
+             that are currently not being used
+             */
+            
             userArray.append(currentUser)
         }
         
