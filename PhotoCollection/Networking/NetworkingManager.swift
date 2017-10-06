@@ -158,5 +158,81 @@ class NetworkingManager: NSObject {
         return userArray
     }
     
+    static func loadAlbumsWithCompletion(completionHandler:@escaping ([Album])->Void) -> Void {
+        
+        let baseRequestString = "https://jsonplaceholder.typicode.com/albums/"
+        
+        
+        guard let url = URL(string: baseRequestString) else {
+            print("Error: cannot create URL")
+            return
+        }
+        
+        // set up the session
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config,
+                                 delegate: nil,
+                                 delegateQueue: OperationQueue.main)
+        
+        // make the request with the session
+        let urlRequest = URLRequest(url: url)
+        let task = session.dataTask(with: urlRequest) { (data, response, error) in
+            
+            //check 1: no errors
+            guard error == nil else {
+                print("error calling the request:\(error!)")
+                return
+            }
+            
+            //check 2: data is non-nil
+            guard data != nil else {
+                print("Error: data is nil")
+                return
+            }
+            
+            //check 3: response parameter is non-nil
+            if response != nil {
+                do {
+                    
+                    //JSON response is an array of dictionaries
+                    if let responseArray = try JSONSerialization.jsonObject(with: data!, options: [])as? [[String: AnyObject]]{
+                        
+                        
+                        print(" album responseDictionary = \(responseArray)")
+                        
+                        var albumArray: [Album] = self.processJsonResponseForAlbum(albumDictionaryArray: responseArray)
+                        
+                        print("album Array[0] =\(albumArray[0])")
+                        //perform completion handler on post array
+                        completionHandler(albumArray)
+                    }
+                    
+                } catch let error as NSError {
+                    print(error)
+                }
+            }
+        }
+        
+        task.resume()
+    }
+    
+    private static func processJsonResponseForAlbum(albumDictionaryArray:[[String:AnyObject]])->[Album]{
+        
+        var albumArray:[Album] = []
+        
+        for currentAlbumDictionary in albumDictionaryArray{
+
+            let currentAlbum:Album = Album()
+            
+            currentAlbum.userId = currentAlbumDictionary["userId"]!.stringValue as String
+            currentAlbum.id = currentAlbumDictionary["id"]!.stringValue as String
+            currentAlbum.title = currentAlbumDictionary["title"] as! String
+
+            albumArray.append(currentAlbum)
+        }
+        
+        return albumArray
+    }
+    
     
 }

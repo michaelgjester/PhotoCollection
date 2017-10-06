@@ -53,6 +53,11 @@ class MasterViewController: UITableViewController {
         NetworkingManager.loadUsersWithCompletion(completionHandler:loadUserCompletionHandler)
         
         
+        NetworkingManager.loadAlbumsWithCompletion { (albumArray:[Album]) in
+            //do something here...
+            print("the completion finished for albums...")
+        }
+        
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 120.0
     }
