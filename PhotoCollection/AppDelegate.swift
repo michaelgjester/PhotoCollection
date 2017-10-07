@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         splitViewController.maximumPrimaryColumnWidth = splitViewController.view.bounds.size.width
         splitViewController.preferredPrimaryColumnWidthFraction = 0.4
         
+        let appDocDirectory = CoreDataStack.sharedInstance.applicationDocumentsDirectory()
+        print("Application Documents Directory = \(appDocDirectory)")
         
         
         return true

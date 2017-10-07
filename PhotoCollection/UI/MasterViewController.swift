@@ -41,6 +41,7 @@ class MasterViewController: UITableViewController {
         
         //grab data from network
         self.performNetworkCalls()
+        self.updateCoreData()
         
         //after networking completes, reload table
         //make sure table reload (and any other animations)
@@ -58,7 +59,7 @@ class MasterViewController: UITableViewController {
         
         
     }
-
+    
     func performNetworkCalls(){
         
         //use a dispatch group to ensure all network calls are completed
@@ -95,6 +96,12 @@ class MasterViewController: UITableViewController {
         
         //wait until network calls are complete
         dispatchGroup.wait()
+    }
+    
+    func updateCoreData(){
+        
+        CoreDataStack.insertPostArray(postArray: self.postArray)
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
