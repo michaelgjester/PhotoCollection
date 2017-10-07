@@ -62,69 +62,106 @@ class CoreDataManager: NSObject {
     
     // MARK: - CRUD operations for model objects to core data
     
-    static func insertPostArray(postArray:[Post]){
+
+    static func mergePostArray(postArray:[Post]){
         
         let context = CoreDataManager.sharedInstance.persistentContainer.viewContext
         
         for post:Post in postArray{
-            if let postEntity = NSEntityDescription.insertNewObject(forEntityName: "PostEntity", into: context) as? PostEntity {
-                postEntity.userId = post.userId
-                postEntity.id = post.id
-                postEntity.title = post.title
-                postEntity.body = post.body
+            
+            //only create the entry if one does not already exist for specified id
+            if (!entryExists(entityName: "PostEntity", id: post.id)){
+                
+                if let postEntity = NSEntityDescription.insertNewObject(forEntityName: "PostEntity", into: context) as? PostEntity {
+                    postEntity.userId = post.userId
+                    postEntity.id = post.id
+                    postEntity.title = post.title
+                    postEntity.body = post.body
+                }
             }
         }
 
         saveContext()
     }
     
-    static func insertUserArray(userArray:[User]){
+
+    static func mergeUserArray(userArray:[User]){
         
         let context = CoreDataManager.sharedInstance.persistentContainer.viewContext
         
         for user:User in userArray{
-            if let userEntity = NSEntityDescription.insertNewObject(forEntityName: "UserEntity", into: context) as? UserEntity {
-                userEntity.id = user.id
-                userEntity.name = user.name
-                userEntity.username = user.username
-                userEntity.email = user.email
-                userEntity.address = user.address
+            
+            //only create the entry if one does not already exist for specified id
+            if (!entryExists(entityName: "UserEntity", id: user.id)){
+                
+                if let userEntity = NSEntityDescription.insertNewObject(forEntityName: "UserEntity", into: context) as? UserEntity {
+                    userEntity.id = user.id
+                    userEntity.name = user.name
+                    userEntity.username = user.username
+                    userEntity.email = user.email
+                    userEntity.address = user.address
+                }
             }
         }
         
         saveContext()
     }
     
-    static func insertAlbumArray(albumArray:[Album]){
+    static func mergeAlbumArray(albumArray:[Album]){
         
         let context = CoreDataManager.sharedInstance.persistentContainer.viewContext
         
+
         for album:Album in albumArray{
-            if let albumEntity = NSEntityDescription.insertNewObject(forEntityName: "AlbumEntity", into: context) as? AlbumEntity {
-                albumEntity.userId = album.userId
-                albumEntity.id = album.id
-                albumEntity.title = album.title
+                
+            //only create the entry if one does not already exist for specified id
+            if (!entryExists(entityName: "AlbumEntity", id: album.id)){
+                
+                if let albumEntity = NSEntityDescription.insertNewObject(forEntityName: "AlbumEntity", into: context) as? AlbumEntity {
+                    albumEntity.userId = album.userId
+                    albumEntity.id = album.id
+                    albumEntity.title = album.title
+                }
             }
         }
         
         saveContext()
     }
     
-    static func insertPhotoArray(photoArray:[Photo]){
+    static func mergePhotoArray(photoArray:[Photo]){
         
         let context = CoreDataManager.sharedInstance.persistentContainer.viewContext
         
         for photo:Photo in photoArray{
-            if let photoEntity = NSEntityDescription.insertNewObject(forEntityName: "PhotoEntity", into: context) as? PhotoEntity {
-                photoEntity.albumId = photo.albumId
-                photoEntity.id = photo.id
-                photoEntity.title = photo.title
-                photoEntity.url = photo.url
-                photoEntity.thumbnailUrl = photo.thumbnailUrl
+            
+            //only create the entry if one does not already exist for specified id
+            if (!entryExists(entityName: "PhotoEntity", id: photo.id)){
+                
+                if let photoEntity = NSEntityDescription.insertNewObject(forEntityName: "PhotoEntity", into: context) as? PhotoEntity {
+                    photoEntity.albumId = photo.albumId
+                    photoEntity.id = photo.id
+                    photoEntity.title = photo.title
+                    photoEntity.url = photo.url
+                    photoEntity.thumbnailUrl = photo.thumbnailUrl
+                }
             }
         }
         
         saveContext()
+    }
+    
+    //helper method used in merge operations
+    private static func entryExists(entityName:String, id: String)->Bool{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:entityName)
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        var results:[NSManagedObject] = []
+        do {
+            results = try CoreDataManager.sharedInstance.persistentContainer.viewContext.fetch(fetchRequest)
+        }
+        catch {
+            print("error executing fetch request: \(error)")
+        }
+        return results.count > 0
     }
     
     static func clearData(){

@@ -99,11 +99,10 @@ class MasterViewController: UITableViewController {
     }
     
     func updateCoreData(){
-        CoreDataManager.clearData()
-        CoreDataManager.insertPostArray(postArray: self.postArray)
-        CoreDataManager.insertUserArray(userArray: self.userArray)
-        CoreDataManager.insertAlbumArray(albumArray: self.albumArray)
-        CoreDataManager.insertPhotoArray(photoArray: self.photoArray)
+        CoreDataManager.mergePostArray(postArray: self.postArray)
+        CoreDataManager.mergeUserArray(userArray: self.userArray)
+        CoreDataManager.mergeAlbumArray(albumArray: self.albumArray)
+        CoreDataManager.mergePhotoArray(photoArray: self.photoArray)
     }
     
     override func viewWillAppear(_ animated: Bool) {
