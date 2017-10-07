@@ -1,5 +1,5 @@
 //
-//  CoreDataStack.swift
+//  CoreDataManager.swift
 //  PhotoCollection
 //
 //  Created by Michael Jester on 10/7/17.
@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 import CoreData
 
-class CoreDataStack: NSObject {
+class CoreDataManager: NSObject {
     
-    static let sharedInstance = CoreDataStack()
+    static let sharedInstance = CoreDataManager()
     private override init() {}
     
     // MARK: - Core Data stack
@@ -46,7 +46,7 @@ class CoreDataStack: NSObject {
     // MARK: - Core Data Saving support
     
     static func saveContext() {
-        let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
+        let context = CoreDataManager.sharedInstance.persistentContainer.viewContext
         
         if context.hasChanges {
             do {
@@ -64,7 +64,7 @@ class CoreDataStack: NSObject {
     
     static func insertPostArray(postArray:[Post]){
         
-        let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
+        let context = CoreDataManager.sharedInstance.persistentContainer.viewContext
         
         for post:Post in postArray{
             if let postEntity = NSEntityDescription.insertNewObject(forEntityName: "PostEntity", into: context) as? PostEntity {
@@ -81,7 +81,7 @@ class CoreDataStack: NSObject {
     static func clearData(){
         do {
             
-            let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
+            let context = CoreDataManager.sharedInstance.persistentContainer.viewContext
             let postsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: PostEntity.self))
             
 //            let usersFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: PostEntity.self))
@@ -94,7 +94,7 @@ class CoreDataStack: NSObject {
     }
     
     static private func clearDataForFetchRequest(fetchRequest:NSFetchRequest<NSFetchRequestResult>){
-        let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
+        let context = CoreDataManager.sharedInstance.persistentContainer.viewContext
         do {
             let objects  = try context.fetch(fetchRequest) as? [NSManagedObject]
             _ = objects.map{$0.map{context.delete($0)}}
@@ -108,7 +108,7 @@ class CoreDataStack: NSObject {
 
 
 
-extension CoreDataStack {
+extension CoreDataManager {
     
     func applicationDocumentsDirectory() -> String {
         // The directory the application uses to store the Core Data store file.

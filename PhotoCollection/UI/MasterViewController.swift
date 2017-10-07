@@ -99,8 +99,8 @@ class MasterViewController: UITableViewController {
     }
     
     func updateCoreData(){
-        CoreDataStack.clearData()
-        CoreDataStack.insertPostArray(postArray: self.postArray)
+        CoreDataManager.clearData()
+        CoreDataManager.insertPostArray(postArray: self.postArray)
     
     }
     
