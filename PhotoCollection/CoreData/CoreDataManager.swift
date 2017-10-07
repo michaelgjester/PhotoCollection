@@ -78,17 +78,33 @@ class CoreDataManager: NSObject {
         saveContext()
     }
     
+    static func insertUserArray(userArray:[User]){
+        
+        let context = CoreDataManager.sharedInstance.persistentContainer.viewContext
+        
+        for user:User in userArray{
+            if let userEntity = NSEntityDescription.insertNewObject(forEntityName: "UserEntity", into: context) as? UserEntity {
+                userEntity.id = user.id
+                userEntity.name = user.name
+                userEntity.username = user.username
+                userEntity.email = user.email
+                userEntity.address = user.address
+            }
+        }
+        
+        saveContext()
+    }
+    
     static func clearData(){
         do {
             
-            let context = CoreDataManager.sharedInstance.persistentContainer.viewContext
             let postsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: PostEntity.self))
-            
-//            let usersFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: PostEntity.self))
+            let usersFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: UserEntity.self))
 //            let albumsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: PostEntity.self))
 //            let photosFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: PostEntity.self))
 //
             clearDataForFetchRequest(fetchRequest: postsFetchRequest)
+            clearDataForFetchRequest(fetchRequest: usersFetchRequest)
 
         }
     }

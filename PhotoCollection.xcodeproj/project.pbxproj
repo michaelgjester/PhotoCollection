@@ -10,13 +10,15 @@
 		1D06AD9C1F894A29008F51F5 /* PhotoCollection.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1D06AD9A1F894A29008F51F5 /* PhotoCollection.xcdatamodeld */; };
 		1D06AD9F1F894A7E008F51F5 /* PostEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D06AD9D1F894A7E008F51F5 /* PostEntity+CoreDataClass.swift */; };
 		1D06ADA01F894A7E008F51F5 /* PostEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D06AD9E1F894A7E008F51F5 /* PostEntity+CoreDataProperties.swift */; };
-		1D06ADA21F894ABB008F51F5 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D06ADA11F894ABB008F51F5 /* CoreDataStack.swift */; };
+		1D06ADA21F894ABB008F51F5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D06ADA11F894ABB008F51F5 /* CoreDataManager.swift */; };
 		1D1AE2611F8807120087B0E7 /* LargeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1AE25F1F8807120087B0E7 /* LargeDetailViewController.swift */; };
 		1D1AE2621F8807120087B0E7 /* LargeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D1AE2601F8807120087B0E7 /* LargeDetailViewController.xib */; };
 		1D9D4A771F87006500F7F8C4 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9D4A761F87006400F7F8C4 /* Album.swift */; };
 		1D9D4A791F87009D00F7F8C4 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9D4A781F87009D00F7F8C4 /* Photo.swift */; };
 		1DAF37C81F8717B20080268C /* UIImage+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAF37C71F8717B20080268C /* UIImage+Networking.swift */; };
 		1DAF37CA1F8717ED0080268C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAF37C91F8717ED0080268C /* ImageCache.swift */; };
+		1DDB047C1F896E7900A910F2 /* UserEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDB047A1F896E7900A910F2 /* UserEntity+CoreDataClass.swift */; };
+		1DDB047D1F896E7900A910F2 /* UserEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDB047B1F896E7900A910F2 /* UserEntity+CoreDataProperties.swift */; };
 		1DEE25CC1F8560CA0043EE56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEE25CB1F8560CA0043EE56 /* AppDelegate.swift */; };
 		1DEE25CE1F8560CA0043EE56 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEE25CD1F8560CA0043EE56 /* MasterViewController.swift */; };
 		1DEE25D01F8560CA0043EE56 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEE25CF1F8560CA0043EE56 /* DetailViewController.swift */; };
@@ -32,7 +34,7 @@
 		1D06AD9B1F894A29008F51F5 /* PhotoCollection.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoCollection.xcdatamodel; sourceTree = "<group>"; };
 		1D06AD9D1F894A7E008F51F5 /* PostEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1D06AD9E1F894A7E008F51F5 /* PostEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		1D06ADA11F894ABB008F51F5 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		1D06ADA11F894ABB008F51F5 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		1D1AE25F1F8807120087B0E7 /* LargeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeDetailViewController.swift; sourceTree = "<group>"; };
 		1D1AE2601F8807120087B0E7 /* LargeDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LargeDetailViewController.xib; sourceTree = "<group>"; };
 		1D1AE2651F88198F0087B0E7 /* defaultThumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultThumbnail.png; sourceTree = "<group>"; };
@@ -40,6 +42,8 @@
 		1D9D4A781F87009D00F7F8C4 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		1DAF37C71F8717B20080268C /* UIImage+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Networking.swift"; sourceTree = "<group>"; };
 		1DAF37C91F8717ED0080268C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		1DDB047A1F896E7900A910F2 /* UserEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1DDB047B1F896E7900A910F2 /* UserEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1DEE25C81F8560CA0043EE56 /* PhotoCollection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoCollection.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DEE25CB1F8560CA0043EE56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1DEE25CD1F8560CA0043EE56 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +73,7 @@
 			children = (
 				1D06ADA31F896431008F51F5 /* DataModels */,
 				1D06AD9A1F894A29008F51F5 /* PhotoCollection.xcdatamodeld */,
-				1D06ADA11F894ABB008F51F5 /* CoreDataStack.swift */,
+				1D06ADA11F894ABB008F51F5 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -79,6 +83,8 @@
 			children = (
 				1D06AD9D1F894A7E008F51F5 /* PostEntity+CoreDataClass.swift */,
 				1D06AD9E1F894A7E008F51F5 /* PostEntity+CoreDataProperties.swift */,
+				1DDB047A1F896E7900A910F2 /* UserEntity+CoreDataClass.swift */,
+				1DDB047B1F896E7900A910F2 /* UserEntity+CoreDataProperties.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -229,15 +235,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D06ADA21F894ABB008F51F5 /* CoreDataStack.swift in Sources */,
+				1D06ADA21F894ABB008F51F5 /* CoreDataManager.swift in Sources */,
 				1D06ADA01F894A7E008F51F5 /* PostEntity+CoreDataProperties.swift in Sources */,
 				1D06AD9F1F894A7E008F51F5 /* PostEntity+CoreDataClass.swift in Sources */,
 				1DAF37CA1F8717ED0080268C /* ImageCache.swift in Sources */,
 				1D9D4A791F87009D00F7F8C4 /* Photo.swift in Sources */,
 				1D06AD9C1F894A29008F51F5 /* PhotoCollection.xcdatamodeld in Sources */,
+				1DDB047D1F896E7900A910F2 /* UserEntity+CoreDataProperties.swift in Sources */,
 				1DEE25D01F8560CA0043EE56 /* DetailViewController.swift in Sources */,
 				1DEE25E11F8562A40043EE56 /* NetworkingManager.swift in Sources */,
 				1DEE25E61F8596500043EE56 /* User.swift in Sources */,
+				1DDB047C1F896E7900A910F2 /* UserEntity+CoreDataClass.swift in Sources */,
 				1DEE25CE1F8560CA0043EE56 /* MasterViewController.swift in Sources */,
 				1DEE25CC1F8560CA0043EE56 /* AppDelegate.swift in Sources */,
 				1D1AE2611F8807120087B0E7 /* LargeDetailViewController.swift in Sources */,

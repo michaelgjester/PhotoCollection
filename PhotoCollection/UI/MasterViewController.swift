@@ -101,7 +101,7 @@ class MasterViewController: UITableViewController {
     func updateCoreData(){
         CoreDataManager.clearData()
         CoreDataManager.insertPostArray(postArray: self.postArray)
-    
+        CoreDataManager.insertUserArray(userArray: self.userArray)
     }
     
     override func viewWillAppear(_ animated: Bool) {
