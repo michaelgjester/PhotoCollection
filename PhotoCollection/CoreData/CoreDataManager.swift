@@ -95,16 +95,50 @@ class CoreDataManager: NSObject {
         saveContext()
     }
     
+    static func insertAlbumArray(albumArray:[Album]){
+        
+        let context = CoreDataManager.sharedInstance.persistentContainer.viewContext
+        
+        for album:Album in albumArray{
+            if let albumEntity = NSEntityDescription.insertNewObject(forEntityName: "AlbumEntity", into: context) as? AlbumEntity {
+                albumEntity.userId = album.userId
+                albumEntity.id = album.id
+                albumEntity.title = album.title
+            }
+        }
+        
+        saveContext()
+    }
+    
+    static func insertPhotoArray(photoArray:[Photo]){
+        
+        let context = CoreDataManager.sharedInstance.persistentContainer.viewContext
+        
+        for photo:Photo in photoArray{
+            if let photoEntity = NSEntityDescription.insertNewObject(forEntityName: "PhotoEntity", into: context) as? PhotoEntity {
+                photoEntity.albumId = photo.albumId
+                photoEntity.id = photo.id
+                photoEntity.title = photo.title
+                photoEntity.url = photo.url
+                photoEntity.thumbnailUrl = photo.thumbnailUrl
+            }
+        }
+        
+        saveContext()
+    }
+    
     static func clearData(){
         do {
             
             let postsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: PostEntity.self))
             let usersFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: UserEntity.self))
-//            let albumsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: PostEntity.self))
-//            let photosFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: PostEntity.self))
-//
+            let albumsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: AlbumEntity.self))
+            let photosFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: PhotoEntity.self))
+
             clearDataForFetchRequest(fetchRequest: postsFetchRequest)
             clearDataForFetchRequest(fetchRequest: usersFetchRequest)
+            clearDataForFetchRequest(fetchRequest: albumsFetchRequest)
+            clearDataForFetchRequest(fetchRequest: photosFetchRequest)
 
         }
     }
