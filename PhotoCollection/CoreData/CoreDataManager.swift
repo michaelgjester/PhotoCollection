@@ -84,6 +84,32 @@ class CoreDataManager: NSObject {
         saveContext()
     }
     
+    static func deletePostFromCoreData(post:Post){
+        
+        let deletePostRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: PostEntity.self))
+        deletePostRequest.predicate = NSPredicate(format:"id = %@", post.id)
+        
+        let context = CoreDataManager.sharedInstance.persistentContainer.viewContext
+        
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:String(describing: PostEntity.self))
+        fetchRequest.predicate = NSPredicate(format: "id == %@", post.id)
+        var results:[NSManagedObject] = []
+        do {
+            results = try CoreDataManager.sharedInstance.persistentContainer.viewContext.fetch(fetchRequest)
+            
+            //should only be one entry since id is a unique field
+            //but in case of duplicates delete any/all objects with specified id
+            for object in results{
+                context.delete(object)
+                saveContext()
+            }
+        }
+        catch {
+            print("error executing fetch request: \(error)")
+        }
+        
+    }
 
     static func mergeUserArray(userArray:[User]){
         

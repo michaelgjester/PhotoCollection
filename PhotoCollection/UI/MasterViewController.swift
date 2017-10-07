@@ -164,8 +164,16 @@ class MasterViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
+            
+            //delete the post object from core data
+            CoreDataManager.deletePostFromCoreData(post: self.postArray[indexPath.row])
+            
+            //delete post object from local array
             self.postArray.remove(at: indexPath.row)
+            
+            //update the tableView
             tableView.deleteRows(at: [indexPath], with: .fade)
+        
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
