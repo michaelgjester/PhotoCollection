@@ -77,6 +77,32 @@ class CoreDataStack: NSObject {
 
         saveContext()
     }
+    
+    static func clearData(){
+        do {
+            
+            let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
+            let postsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: PostEntity.self))
+            
+//            let usersFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: PostEntity.self))
+//            let albumsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: PostEntity.self))
+//            let photosFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: PostEntity.self))
+//
+            clearDataForFetchRequest(fetchRequest: postsFetchRequest)
+
+        }
+    }
+    
+    static private func clearDataForFetchRequest(fetchRequest:NSFetchRequest<NSFetchRequestResult>){
+        let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
+        do {
+            let objects  = try context.fetch(fetchRequest) as? [NSManagedObject]
+            _ = objects.map{$0.map{context.delete($0)}}
+            saveContext()
+        } catch let error {
+            print("ERROR DELETING : \(error)")
+        }
+    }
 
 }
 
